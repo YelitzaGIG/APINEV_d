@@ -1,0 +1,294 @@
+/* =============================================================
+   public/css/evaluar.css
+   Estilos exclusivos del módulo Evaluar — SINTESU / APINEV
+   ============================================================= */
+ 
+/* ── Variables (misma paleta que disenar.css) ───────────────── */
+:root {
+    --ev-header-tabla: #b8cce4;
+    --ev-fila-par:     #ffffff;
+    --ev-fila-impar:   #f4f8fd;
+    --ev-seleccion:    #c5d9f1;
+    --ev-borde:        #8db3d4;
+    --ev-titulo:       #1f3864;
+    --ev-btn-mc:       #1a56a0;
+    --ev-btn-el:       #cc2200;
+    --ev-btn-ev:       #1a7a3a;
+    --ev-texto:        #1a1a2e;
+    --ev-font:         'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    --ev-radio:        4px;
+    --ev-sombra:       0 2px 6px rgba(0,0,0,.18);
+}
+ 
+/* ── Layout del content-area ────────────────────────────────── */
+.ev-content {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    padding: 16px 18px;
+    font-family: var(--ev-font);
+    color: var(--ev-texto);
+    min-height: 0;
+    flex: 1;
+}
+ 
+.ev-content h2 {
+    margin: 0 0 4px 0;
+    font-size: 1.2rem;
+    color: var(--ev-titulo);
+    border-bottom: 2px solid var(--ev-borde);
+    padding-bottom: 6px;
+}
+ 
+/* ── Fila de dropdowns ──────────────────────────────────────── */
+.ev-dropdowns {
+    display: flex;
+    gap: 14px;
+    flex-wrap: wrap;
+}
+ 
+.ev-dropdown-panel {
+    flex: 1;
+    min-width: 220px;
+    border: 1px solid var(--ev-borde);
+    border-radius: var(--ev-radio);
+    box-shadow: var(--ev-sombra);
+    background: #fff;
+    padding: 0;
+    position: relative;
+}
+ 
+/* Etiqueta tipo fieldset legend */
+.ev-group-label {
+    position: absolute;
+    top: -10px;
+    left: 10px;
+    background: #fff;
+    padding: 0 5px;
+    font-size: .75rem;
+    font-weight: 700;
+    color: var(--ev-titulo);
+    letter-spacing: .04em;
+    text-transform: uppercase;
+}
+ 
+.ev-select-wrap {
+    padding: 10px 10px 8px;
+}
+ 
+.ev-select {
+    width: 100%;
+    border: 1px solid var(--ev-borde);
+    border-radius: 3px;
+    padding: 5px 28px 5px 8px;
+    font-size: .82rem;
+    font-family: var(--ev-font);
+    color: var(--ev-texto);
+    background: #fff url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6'%3E%3Cpath d='M0 0l5 6 5-6z' fill='%238db3d4'/%3E%3C/svg%3E") no-repeat right 8px center;
+    appearance: none;
+    outline: none;
+    cursor: pointer;
+    transition: border-color .15s;
+}
+ 
+.ev-select:focus {
+    border-color: #5588bb;
+    box-shadow: 0 0 0 2px rgba(85,136,187,.18);
+}
+ 
+/* ── Fila de tablas ─────────────────────────────────────────── */
+.ev-tables-row {
+    display: flex;
+    gap: 14px;
+    flex: 1;
+    min-height: 0;
+}
+ 
+.ev-tables-row .ev-panel {
+    flex: 1;
+    min-width: 0;
+}
+ 
+/* ── Panel / tarjeta ────────────────────────────────────────── */
+.ev-panel {
+    border: 1px solid var(--ev-borde);
+    border-radius: var(--ev-radio);
+    box-shadow: var(--ev-sombra);
+    background: #fff;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+}
+ 
+.ev-panel-header {
+    background: #dce6f1;
+    border-bottom: 1px solid var(--ev-borde);
+    padding: 5px 10px;
+}
+ 
+.ev-panel-title {
+    font-weight: 700;
+    font-size: .85rem;
+    color: var(--ev-titulo);
+    letter-spacing: .03em;
+    text-transform: uppercase;
+}
+ 
+/* ── Barra Anterior / Siguiente ─────────────────────────────── */
+.ev-nav-bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: #eaf1f8;
+    border-bottom: 1px solid var(--ev-borde);
+    padding: 3px 8px;
+}
+ 
+.ev-nav-btn {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    background: #fff;
+    border: 1px solid var(--ev-borde);
+    border-radius: 3px;
+    padding: 3px 10px;
+    font-size: .78rem;
+    font-family: var(--ev-font);
+    font-weight: 600;
+    color: var(--ev-titulo);
+    cursor: pointer;
+    transition: background .15s, transform .1s;
+}
+ 
+.ev-nav-btn:hover {
+    background: #dce6f1;
+    transform: scale(1.04);
+}
+ 
+.ev-nav-btn:disabled {
+    opacity: .4;
+    cursor: default;
+    transform: none;
+}
+ 
+.ev-nav-arrow {
+    font-size: .7rem;
+}
+ 
+.ev-nav-right {
+    margin-left: auto;
+}
+ 
+/* ── Cuerpo del panel (scroll) ──────────────────────────────── */
+.ev-panel-body {
+    overflow: auto;
+    overflow-x: auto;
+    overflow-y: auto;
+    flex: 1;
+    min-height: 0;
+    max-height: 340px;
+}
+ 
+/* Scrollbar */
+.ev-panel-body::-webkit-scrollbar { width: 8px; height: 8px; }
+.ev-panel-body::-webkit-scrollbar-track { background: #eaf1f8; border-radius: 4px; }
+.ev-panel-body::-webkit-scrollbar-thumb { background: #8db3d4; border-radius: 4px; border: 1px solid #c8dff0; }
+.ev-panel-body::-webkit-scrollbar-thumb:hover { background: #5588bb; }
+.ev-panel-body::-webkit-scrollbar-corner { background: #eaf1f8; }
+.ev-panel-body { scrollbar-width: thin; scrollbar-color: #8db3d4 #eaf1f8; }
+ 
+/* ── Tabla ──────────────────────────────────────────────────── */
+.ev-tabla {
+    width: 100%;
+    min-width: max-content;
+    border-collapse: collapse;
+    font-size: .78rem;
+    table-layout: auto;
+}
+ 
+/* Cabecera sticky */
+.ev-tabla thead tr { background: var(--ev-header-tabla); }
+ 
+.ev-tabla thead th {
+    position: sticky;
+    top: 0;
+    z-index: 2;
+    padding: 5px 8px;
+    text-align: left;
+    font-weight: 600;
+    white-space: nowrap;
+    border-bottom: 2px solid var(--ev-borde);
+    border-right: 1px solid #aac5e0;
+    color: var(--ev-titulo);
+    user-select: none;
+    cursor: default;
+    background: var(--ev-header-tabla);
+}
+ 
+.ev-tabla thead th:last-child { border-right: none; }
+ 
+.ev-col-sort { cursor: pointer; }
+.ev-col-sort:hover { background: #a8c4e0; }
+ 
+.ev-sort-icon { font-size: .7rem; color: #5577aa; margin-left: 2px; }
+ 
+/* Filas */
+.ev-tabla tbody tr {
+    border-bottom: 1px solid #d8e8f4;
+    cursor: pointer;
+    transition: background .1s;
+}
+ 
+.ev-tabla tbody tr:nth-child(even) { background: var(--ev-fila-par); }
+.ev-tabla tbody tr:nth-child(odd)  { background: var(--ev-fila-impar); }
+.ev-tabla tbody tr:hover           { background: #daeaf8 !important; }
+.ev-tabla tbody tr.ev-fila-sel     { background: var(--ev-seleccion) !important; }
+ 
+/* Celdas */
+.ev-tabla tbody td {
+    padding: 4px 8px;
+    border-right: 1px solid #e0eaf5;
+    vertical-align: middle;
+    color: var(--ev-texto);
+    max-width: 180px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+ 
+.ev-tabla tbody td:last-child { border-right: none; }
+.ev-td-texto { max-width: 200px; }
+ 
+/* ── Botones de operaciones ─────────────────────────────────── */
+.ev-td-ops { white-space: nowrap; text-align: center; }
+ 
+.ev-btn-op {
+    border: 1px solid;
+    border-radius: 3px;
+    font-size: .68rem;
+    padding: 2px 4px;
+    cursor: pointer;
+    font-family: var(--ev-font);
+    font-weight: 600;
+    transition: opacity .15s, transform .1s;
+    margin: 0 1px;
+    background: #fff;
+}
+ 
+.ev-btn-op:hover { opacity: .8; transform: scale(1.05); }
+ 
+.ev-btn-mc  { color: var(--ev-btn-mc); border-color: var(--ev-btn-mc); }
+.ev-btn-mc:hover { background: #e8f0fb; }
+ 
+.ev-btn-el  { color: var(--ev-btn-el); border-color: var(--ev-btn-el); }
+.ev-btn-el:hover { background: #fdecea; }
+ 
+.ev-btn-ev  { color: var(--ev-btn-ev); border-color: var(--ev-btn-ev); }
+.ev-btn-ev:hover { background: #e6f4ec; }
+ 
+/* ── Responsive básico ──────────────────────────────────────── */
+@media (max-width: 700px) {
+    .ev-dropdowns,
+    .ev-tables-row { flex-direction: column; }
+}
+ 
