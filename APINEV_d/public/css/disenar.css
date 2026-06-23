@@ -1,0 +1,674 @@
+/* =============================================================
+   public/css/disenar.css
+   Estilos exclusivos del módulo Diseñar — SINTESU / APINEV
+   ============================================================= */
+ 
+/* ── Variables ─────────────────────────────────────────────── */
+:root {
+    --color-header-tabla: #b8cce4;   /* azul grisáceo cabecera */
+    --color-fila-par:     #ffffff;
+    --color-fila-impar:   #f4f8fd;
+    --color-seleccion:    #c5d9f1;   /* azul seleccionado */
+    --color-borde:        #8db3d4;
+    --color-panel-titulo: #1f3864;
+    --color-btn-add-bg:   #1f3864;
+    --color-btn-add-txt:  #ffffff;
+    --color-btn-mc:       #1a56a0;
+    --color-btn-el:       #cc2200;
+    --color-texto:        #1a1a2e;
+    --font-tabla:         'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    --radio-panel:        4px;
+    --sombra-panel:       0 2px 6px rgba(0,0,0,.18);
+}
+ 
+/* ── Layout general del content-area ───────────────────────── */
+.content-area {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    padding: 16px 18px;
+    font-family: var(--font-tabla);
+    color: var(--color-texto);
+    /* Asegura que solo esta sección haga scroll si el contenido crece */
+    min-height: 0;
+    flex: 1;
+}
+ 
+.content-area h2 {
+    margin: 0 0 4px 0;
+    font-size: 1.2rem;
+    color: var(--color-panel-titulo);
+    border-bottom: 2px solid var(--color-borde);
+    padding-bottom: 6px;
+}
+ 
+/* ── Fila inferior (Reactivos + Criterios) ──────────────────── */
+.panel-row {
+    display: flex;
+    gap: 14px;
+    flex: 1;
+    min-height: 0;
+}
+ 
+.panel-row .panel {
+    flex: 1;
+    min-width: 0;
+}
+ 
+/* ── Panel / tarjeta ────────────────────────────────────────── */
+.panel {
+    border: 1px solid var(--color-borde);
+    border-radius: var(--radio-panel);
+    box-shadow: var(--sombra-panel);
+    background: #fff;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+}
+ 
+.panel-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: #dce6f1;
+    border-bottom: 1px solid var(--color-borde);
+    padding: 5px 10px;
+}
+ 
+.panel-title {
+    font-weight: 700;
+    font-size: 0.85rem;
+    color: var(--color-panel-titulo);
+    letter-spacing: .03em;
+    text-transform: uppercase;
+}
+ 
+/* Botón "+" agregar fila */
+.btn-add {
+    width: 22px;
+    height: 22px;
+    border: 1px solid var(--color-borde);
+    border-radius: 3px;
+    background: var(--color-btn-add-bg);
+    color: var(--color-btn-add-txt);
+    font-size: 1rem;
+    line-height: 1;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background .2s, transform .15s;
+    padding: 0;
+}
+ 
+.btn-add:hover {
+    background: #2e5da8;
+    transform: scale(1.1);
+}
+ 
+/* ── Cuerpo del panel (scroll independiente) ────────────────── */
+.panel-body {
+    overflow: auto;          /* activa scroll vertical Y horizontal */
+    overflow-x: auto;
+    overflow-y: auto;
+    flex: 1;
+    min-height: 0;           /* imprescindible para que flex respete la altura */
+    /* Altura fija para que el scroll vertical tenga efecto */
+    max-height: 220px;
+}
+ 
+/* ── Scrollbar personalizada (Webkit: Chrome, Edge, Safari) ── */
+.panel-body::-webkit-scrollbar {
+    width:  8px;
+    height: 8px;
+}
+ 
+.panel-body::-webkit-scrollbar-track {
+    background: #eaf1f8;
+    border-radius: 4px;
+}
+ 
+.panel-body::-webkit-scrollbar-thumb {
+    background: #8db3d4;
+    border-radius: 4px;
+    border: 1px solid #c8dff0;
+}
+ 
+.panel-body::-webkit-scrollbar-thumb:hover {
+    background: #5588bb;
+}
+ 
+/* Esquina donde se cruzan ambos scrollbars */
+.panel-body::-webkit-scrollbar-corner {
+    background: #eaf1f8;
+}
+ 
+/* Firefox */
+.panel-body {
+    scrollbar-width: thin;
+    scrollbar-color: #8db3d4 #eaf1f8;
+}
+ 
+/* ── Tabla ──────────────────────────────────────────────────── */
+.tabla-sintesu {
+    width: 100%;
+    min-width: max-content;  /* fuerza scroll horizontal si el contenido es mayor al panel */
+    border-collapse: collapse;
+    font-size: 0.78rem;
+    table-layout: auto;
+}
+ 
+/* Cabecera — sticky para scroll vertical */
+.tabla-sintesu thead tr {
+    background: var(--color-header-tabla);
+}
+ 
+.tabla-sintesu thead th {
+    position: sticky;
+    top: 0;
+    z-index: 2;
+    padding: 5px 8px;
+    text-align: left;
+    font-weight: 600;
+    white-space: nowrap;
+    border-bottom: 2px solid var(--color-borde);
+    border-right: 1px solid #aac5e0;
+    color: var(--color-panel-titulo);
+    cursor: default;
+    user-select: none;
+    background: var(--color-header-tabla); /* necesario para sticky */
+}
+ 
+.tabla-sintesu thead th:last-child {
+    border-right: none;
+}
+ 
+/* Icono de ordenamiento */
+.sort-icon {
+    font-size: 0.7rem;
+    color: #5577aa;
+    margin-left: 2px;
+}
+ 
+.col-sort {
+    cursor: pointer;
+}
+ 
+.col-sort:hover {
+    background: #a8c4e0;
+}
+ 
+/* Filas del cuerpo */
+.tabla-sintesu tbody tr {
+    border-bottom: 1px solid #d8e8f4;
+    cursor: pointer;
+    transition: background .1s;
+}
+ 
+.tabla-sintesu tbody tr:nth-child(even) {
+    background: var(--color-fila-par);
+}
+ 
+.tabla-sintesu tbody tr:nth-child(odd) {
+    background: var(--color-fila-impar);
+}
+ 
+.tabla-sintesu tbody tr:hover {
+    background: #daeaf8 !important;
+}
+ 
+/* Fila seleccionada (azul, como en el wireframe) */
+.tabla-sintesu tbody tr.fila-seleccionada {
+    background: var(--color-seleccion) !important;
+}
+ 
+/* Celdas del cuerpo */
+.tabla-sintesu tbody td {
+    padding: 4px 8px;
+    border-right: 1px solid #e0eaf5;
+    vertical-align: middle;
+    color: var(--color-texto);
+    max-width: 180px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+ 
+.tabla-sintesu tbody td:last-child {
+    border-right: none;
+}
+ 
+/* Celda de texto larga */
+.td-texto {
+    max-width: 220px;
+}
+ 
+/* ── Botones de operaciones ─────────────────────────────────── */
+.td-ops {
+    white-space: nowrap;
+    text-align: center;
+}
+ 
+.btn-op {
+    border: 1px solid;
+    border-radius: 3px;
+    font-size: 0.7rem;
+    padding: 2px 5px;
+    cursor: pointer;
+    font-family: var(--font-tabla);
+    font-weight: 600;
+    transition: opacity .15s, transform .1s;
+    margin: 0 1px;
+    background: #fff;
+}
+ 
+.btn-op:hover {
+    opacity: .8;
+    transform: scale(1.05);
+}
+ 
+.btn-modificar {
+    color: var(--color-btn-mc);
+    border-color: var(--color-btn-mc);
+}
+ 
+.btn-modificar:hover {
+    background: #e8f0fb;
+}
+ 
+.btn-eliminar {
+    color: var(--color-btn-el);
+    border-color: var(--color-btn-el);
+}
+ 
+.btn-eliminar:hover {
+    background: #fdecea;
+}
+ 
+/* ── Modal ──────────────────────────────────────────────────── */
+.modal-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, .45);
+    z-index: 9000;
+    display: flex !important;
+    align-items: center;
+    justify-content: center;
+    animation: fadeIn .2s ease;
+}
+ 
+.modal-overlay[style*="display:none"],
+.modal-overlay[style*="display: none"] {
+    display: none !important;
+}
+ 
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+}
+ 
+.modal-box {
+    background: #fff;
+    border: 1px solid var(--color-borde);
+    border-radius: 6px;
+    width: 420px;
+    max-width: 95vw;
+    box-shadow: 0 8px 32px rgba(0,0,0,.28);
+    display: flex;
+    flex-direction: column;
+    animation: slideUp .2s ease;
+}
+ 
+@keyframes slideUp {
+    from { transform: translateY(20px); opacity: 0; }
+    to   { transform: translateY(0);    opacity: 1; }
+}
+ 
+.modal-header {
+    background: #dce6f1;
+    border-bottom: 1px solid var(--color-borde);
+    padding: 8px 14px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-weight: 700;
+    font-size: .9rem;
+    color: var(--color-panel-titulo);
+    border-radius: 6px 6px 0 0;
+}
+ 
+.modal-close {
+    background: none;
+    border: none;
+    font-size: 1rem;
+    cursor: pointer;
+    color: #666;
+    line-height: 1;
+    padding: 0;
+}
+ 
+.modal-close:hover { color: var(--color-btn-el); }
+ 
+.modal-body {
+    padding: 16px 18px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+ 
+.modal-body label {
+    font-size: .8rem;
+    font-weight: 600;
+    color: var(--color-panel-titulo);
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+}
+ 
+.modal-body input,
+.modal-body textarea,
+.modal-body select {
+    border: 1px solid var(--color-borde);
+    border-radius: 3px;
+    padding: 5px 8px;
+    font-size: .82rem;
+    font-family: var(--font-tabla);
+    outline: none;
+    transition: border-color .15s;
+}
+ 
+.modal-body input:focus,
+.modal-body textarea:focus,
+.modal-body select:focus {
+    border-color: var(--color-btn-mc);
+}
+ 
+.modal-footer {
+    border-top: 1px solid #dde6f0;
+    padding: 8px 14px;
+    display: flex;
+    justify-content: flex-end;
+    gap: 8px;
+    border-radius: 0 0 6px 6px;
+}
+ 
+.btn-modal-cancel,
+.btn-modal-ok {
+    padding: 5px 18px;
+    border-radius: 3px;
+    font-size: .82rem;
+    font-family: var(--font-tabla);
+    font-weight: 600;
+    cursor: pointer;
+    border: 1px solid;
+    transition: background .15s;
+}
+ 
+.btn-modal-cancel {
+    background: #fff;
+    border-color: #aaa;
+    color: #555;
+}
+ 
+.btn-modal-cancel:hover { background: #f0f0f0; }
+ 
+.btn-modal-ok {
+    background: var(--color-btn-add-bg);
+    border-color: var(--color-btn-add-bg);
+    color: #fff;
+}
+ 
+.btn-modal-ok:hover { background: #2e5da8; }
+ 
+/* ── Modal "Nuevo Instrumento" (tabla Creados) ──────────────── */
+ 
+/* Fondo oscuro centrado */
+.ni-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, .40);
+    z-index: 9100;
+    display: flex !important;
+    align-items: center;
+    justify-content: center;
+    animation: fadeIn .18s ease;
+}
+ 
+.ni-overlay[style*="display:none"],
+.ni-overlay[style*="display: none"] {
+    display: none !important;
+}
+ 
+/* Caja flotante — imita el wireframe */
+.ni-box {
+    background: #fff;
+    border: 2px solid #5588bb;
+    border-radius: 5px;
+    width: 380px;
+    max-width: 95vw;
+    box-shadow: 0 10px 36px rgba(0,0,0,.32);
+    display: flex;
+    flex-direction: column;
+    animation: slideUp .2s ease;
+    font-family: var(--font-tabla);
+}
+ 
+/* Barra de título */
+.ni-header {
+    background: #dce6f1;
+    border-bottom: 2px solid #5588bb;
+    padding: 7px 12px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-weight: 700;
+    font-size: .88rem;
+    color: var(--color-panel-titulo);
+    border-radius: 3px 3px 0 0;
+    letter-spacing: .02em;
+}
+ 
+.ni-close {
+    background: none;
+    border: none;
+    font-size: .9rem;
+    cursor: pointer;
+    color: #777;
+    padding: 0;
+    line-height: 1;
+    transition: color .15s;
+}
+.ni-close:hover { color: var(--color-btn-el); }
+ 
+/* Cuerpo del formulario */
+.ni-body {
+    padding: 14px 18px 8px;
+    display: flex;
+    flex-direction: column;
+    gap: 9px;
+}
+ 
+/* Fila label + input */
+.ni-row {
+    display: grid;
+    grid-template-columns: 110px 1fr;
+    align-items: center;
+    gap: 8px;
+}
+ 
+/* Fila con textarea (alineación al inicio) */
+.ni-row-area {
+    align-items: flex-start;
+}
+ 
+.ni-label {
+    font-size: .82rem;
+    font-weight: 600;
+    color: var(--color-panel-titulo);
+    text-align: right;
+    padding-right: 4px;
+}
+ 
+.ni-input,
+.ni-textarea {
+    border: 1px solid #aac5e0;
+    border-radius: 3px;
+    padding: 4px 7px;
+    font-size: .82rem;
+    font-family: var(--font-tabla);
+    outline: none;
+    transition: border-color .15s, box-shadow .15s;
+    background: #fff;
+    color: var(--color-texto);
+    width: 100%;
+    box-sizing: border-box;
+}
+ 
+.ni-input[readonly] {
+    background: #f0f4f8;
+    color: #888;
+    cursor: not-allowed;
+}
+ 
+.ni-input:focus,
+.ni-textarea:focus {
+    border-color: #5588bb;
+    box-shadow: 0 0 0 2px rgba(85,136,187,.18);
+}
+ 
+.ni-textarea {
+    resize: vertical;
+    min-height: 70px;
+}
+ 
+/* Pie con botones de icono */
+.ni-footer {
+    padding: 8px 18px 12px;
+    display: flex;
+    justify-content: flex-end;
+    gap: 12px;
+}
+ 
+.ni-btn {
+    width: 36px;
+    height: 36px;
+    border-radius: 4px;
+    border: 1px solid;
+    font-size: 1.1rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background .15s, transform .1s, box-shadow .15s;
+    line-height: 1;
+}
+ 
+.ni-btn:hover {
+    transform: scale(1.08);
+    box-shadow: 0 2px 8px rgba(0,0,0,.18);
+}
+ 
+.ni-btn-cancel {
+    background: #fff;
+    border-color: var(--color-btn-el);
+    color: var(--color-btn-el);
+}
+.ni-btn-cancel:hover { background: #fdecea; }
+ 
+.ni-btn-save {
+    background: #fff;
+    border-color: var(--color-btn-mc);
+    color: var(--color-btn-mc);
+}
+.ni-btn-save:hover { background: #e8f0fb; }
+
+/* ── Grupo de radios (modal Nuevo Reactivo) ─────────────────── */
+.nr-radio-group {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+ 
+.nr-radio {
+    display: flex;
+    align-items: center;
+    gap: 3px;
+    font-size: .82rem;
+    font-weight: 600;
+    color: var(--color-panel-titulo);
+    cursor: pointer;
+    user-select: none;
+}
+ 
+.nr-radio input[type="radio"] {
+    accent-color: var(--color-btn-mc);
+    width: 13px;
+    height: 13px;
+    cursor: pointer;
+    margin: 0;
+}
+
+/* ── Modal Confirmación Eliminar Instrumento ────────────────── */
+.ec-box {
+    width: 340px;
+}
+ 
+.ec-body {
+    text-align: center;
+    padding: 18px 22px 10px;
+    gap: 6px;
+}
+ 
+.ec-body p {
+    font-size: .85rem;
+    line-height: 1.55;
+    color: var(--color-texto);
+    margin: 0;
+}
+ 
+.ec-nota {
+    font-size: .8rem !important;
+    color: #555 !important;
+    margin-top: 8px !important;
+}
+ 
+.ec-footer {
+    display: flex;
+    border-top: 1px solid #dde6f0;
+}
+ 
+.ec-btn {
+    flex: 1;
+    padding: 9px 0;
+    border: none;
+    border-top: none;
+    font-size: .88rem;
+    font-family: var(--font-tabla);
+    font-weight: 700;
+    cursor: pointer;
+    transition: background .15s;
+    letter-spacing: .03em;
+}
+ 
+.ec-btn-no {
+    background: #f5f5f5;
+    color: #444;
+    border-right: 1px solid #dde6f0;
+    border-radius: 0 0 0 5px;
+}
+.ec-btn-no:hover { background: #e8e8e8; }
+ 
+.ec-btn-si {
+    background: #fff;
+    color: var(--color-btn-el);
+    border-radius: 0 0 5px 0;
+}
+.ec-btn-si:hover { background: #fdecea; }
+/* ── Responsive básico ──────────────────────────────────────── */
+@media (max-width: 700px) {
+    .panel-row {
+        flex-direction: column;
+    }
+}
+ 
